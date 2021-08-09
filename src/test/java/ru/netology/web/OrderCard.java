@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OrderCard<WebDriver> {
+public class OrderCard {
     private WebDriver driver;
 
     @BeforeAll
@@ -23,9 +23,9 @@ public class OrderCard<WebDriver> {
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--headless");
         driver = new ChromeDriver(options);
     }
 
@@ -43,12 +43,12 @@ public class OrderCard<WebDriver> {
         driver.findElement(By.className("checkbox")).click();
         driver.findElement(By.tagName("button")).click();
         String expectedMessage = "  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-        String actualMessage = driver.findElement(By.className("paragraph")).getText();
+        String actualMessage = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
         assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
-    void shouldBeFilledInWithNonValidData() {
+    void shouldEnterTheLastNameAndFirstNameInEnglish() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] .input__control")).sendKeys("Ivanov Ivan");
         driver.findElement(By.cssSelector("[data-test-id=phone] .input__control")).sendKeys("+79270123456");
