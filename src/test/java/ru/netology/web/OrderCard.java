@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OrderCard {
+public class OrderCard<WebDriver> {
     private WebDriver driver;
 
     @BeforeAll
