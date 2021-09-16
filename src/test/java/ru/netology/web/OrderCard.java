@@ -23,9 +23,9 @@ public class OrderCard {
     @BeforeEach
     void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
+//        options.addArguments("--disable-dev-shm-usage");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--headless");
         driver = new ChromeDriver(options);
     }
 
@@ -78,42 +78,6 @@ public class OrderCard {
         driver.findElement(By.tagName("button")).click();
         String expectedMessage = "Поле обязательно для заполнения";
         String actualMessage = driver.findElement(By.cssSelector("[data-test-id=name] .input__sub")).getText().trim();
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    void shouldLeaveTheLastNameAndFirstNameFieldEmpty() {
-        driver.get("http://localhost:9999");
-        driver.findElement(By.cssSelector("[data-test-id=name] .input__control")).sendKeys("");
-        driver.findElement(By.cssSelector("[data-test-id=phone] .input__control")).sendKeys("+79270123456");
-        driver.findElement(By.className("checkbox")).click();
-        driver.findElement(By.tagName("button")).click();
-        String expectedMessage = "Поле обязательно для заполнения";
-        String actualMessage = driver.findElement(By.cssSelector("[data-test-id=name] .input__sub")).getText().trim();
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    void shouldLeaveThePhoneFieldEmpty() {
-        driver.get("http://localhost:9999");
-        driver.findElement(By.cssSelector("[data-test-id=name] .input__control")).sendKeys("Иванов Иван");
-        driver.findElement(By.cssSelector("[data-test-id=phone] .input__control")).sendKeys("");
-        driver.findElement(By.className("checkbox")).click();
-        driver.findElement(By.tagName("button")).click();
-        String expectedMessage = "Поле обязательно для заполнения";
-        String actualMessage = driver.findElement(By.cssSelector("[data-test-id=phone] .input__sub")).getText().trim();
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    void shouldNotPutACheckMarkInTheCheckbox() {
-        driver.get("http://localhost:9999");
-        driver.findElement(By.cssSelector("[data-test-id=name] .input__control")).sendKeys("Иванов Иван");
-        driver.findElement(By.cssSelector("[data-test-id=phone] .input__control")).sendKeys("+79270123456");
-        driver.findElement(By.className("checkbox"));
-        driver.findElement(By.tagName("button")).click();
-        String expectedMessage = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
-        String actualMessage = driver.findElement(By.cssSelector("[role='presentation']")).getText().trim();
         assertEquals(expectedMessage, actualMessage);
     }
 }
