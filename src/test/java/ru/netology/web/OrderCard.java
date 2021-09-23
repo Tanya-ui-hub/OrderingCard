@@ -110,7 +110,7 @@ public class OrderCard {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] .input__control")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] .input__control")).sendKeys("+79270123456");
-        driver.findElement(By.className("checkbox"));
+        driver.findElement(By.tagName("button")).click();
         String expectedMessage = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
         String actualMessage = driver.findElement(By.cssSelector("[data-test-id=agreement].input_invalid")).getText().trim();
         assertEquals(expectedMessage, actualMessage);
